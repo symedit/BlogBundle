@@ -1,0 +1,26 @@
+<article class="summary blog-post">
+    <h3 class="title">
+        <a href="{{ path('blog_slug_view', {slug: post.slug}) }}">{{ post.title }}</a>
+        <small>
+            Posted by {{ post.author.profile.fullname }}
+            on {{ post.createdAt|date('F j, Y') }}
+        </small>
+    </h3>
+
+    {% if post.image %}
+    <div class="teaser-image">
+        <img class="img-responsive" src="{{ post.image | imagine_filter('blog_thumbnail') }}" alt="{{ post.title }}" />
+    </div>
+    {% endif %}
+
+    <div class="summary">
+        {% if post.summary %}
+            {{ post.summary|raw }}
+        {% else %}
+            {{ post.content|plain(350, '...') }}
+        {% endif %}
+    </div>
+    <div class="clearfix">
+        <a class="read-more btn btn-default btn-sm" href="{{ path('blog_slug_view', { slug: post.slug }) }}">Read Article &raquo;</a>
+    </div>
+</article>
